@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Own 2048 Game</title>
+    <title>My Custom Image 2048 Game</title>
     <style>
         body {
             background-color: #faf8ef;
@@ -53,25 +53,24 @@
             width: 80px;
             height: 80px;
             border-radius: 3px;
-            font-weight: bold;
-            font-size: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             transition: all 0.1s ease-in-out;
         }
-        /* Tile Colors */
-        .t2 { background: #eee4da; color: #776e65; }
-        .t4 { background: #ede0c8; color: #776e65; }
-        .t8 { background: #f2b179; color: #f9f6f2; }
-        .t16 { background: #f59563; color: #f9f6f2; }
-        .t32 { background: #f67c5f; color: #f9f6f2; }
-        .t64 { background: #f65e3b; color: #f9f6f2; }
-        .t128 { background: #edcf72; color: #f9f6f2; font-size: 30px; }
-        .t256 { background: #edcc61; color: #f9f6f2; font-size: 30px; }
-        .t512 { background: #edc850; color: #f9f6f2; font-size: 30px; }
-        .t1024 { background: #edc53f; color: #f9f6f2; font-size: 25px; }
-        .t2048 { background: #edc22e; color: #f9f6f2; font-size: 25px; }
+
+        /* 🖼️ REPLACE THE PATHS BELOW WITH YOUR OWN IMAGE FILENAMES OR URL LINKS */
+        .t2    { background-image: url('anamoneo.jpg'); }
+        .t4    { background-image: url('sara.jpg'); }
+        .t8    { background-image: url('militza.jpg'); }
+        .t16   { background-image: url('somolinos.jpg'); }
+        .t32   { background-image: url('marieta.jpg'); }
+        .t64   { background-image: url('fatima.jpg'); }
+        .t128  { background-image: url('artola.jpg'); }
+        .t256  { background-image: url('laura.jpg'); }
+        .t512  { background-image: url('marias.jpg'); }
+        .t1024 { background-image: url('torrego.jpg'); }
+        .t2048 { background-image: url('2048.jpg'); }
     </style>
 </head>
 <body>
@@ -123,8 +122,6 @@
                     if (board[r][c] !== 0) {
                         let tile = document.createElement('div');
                         tile.classList.add('tile', 't' + board[r][c]);
-                        tile.innerText = board[r][c];
-                        // Calculate positions dynamically for the 400x400 box
                         tile.style.top = (15 + r * 95) + 'px';
                         tile.style.left = (15 + c * 95) + 'px';
                         container.appendChild(tile);
@@ -148,12 +145,11 @@
         }
 
         function rotate() {
-            board = board[0].map((val, index) => board.map(row => row[index]).reverse());
+            board = board.map((val, index) => board.map(row => row[index]).reverse());
         }
 
         function move(direction) {
             let moved = false;
-            // 0: Left, 1: Down, 2: Right, 3: Up
             for (let i = 0; i < direction; i++) rotate();
 
             for (let r = 0; r < boardSize; r++) {
